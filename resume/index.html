@@ -187,6 +187,14 @@
     <div class="swiper-pagination"></div>
   </div>
 
+  <!-- 背景音乐 -->
+  <div class="music">
+    <audio id="music-audio" loop="loop" autoplay="audioplay">
+      <source src="Capo Productions - Inspire.mp3" type="">
+    </audio>
+    <div class="control"></div>
+  </div>
+
   <script src="js/jquery-3.1.0.min.js"></script>
   <script src="js/swiper.min.js"></script>
   <script src="js/swiper.animate1.0.3.min.js"></script>
@@ -208,6 +216,21 @@
         slideChangeTransitionEnd: function () {
           swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
         }
+      }
+    });
+
+    // 音乐控制
+    var lock = true;
+    var music = document.getElementById('music-audio');
+    $('.music').on('click', function () {
+      if (lock) {
+        $(this).addClass('stopped');
+        music.pause();
+        lock = false;
+      } else {
+        $(this).removeClass('stopped');
+        music.play();
+        lock = true;
       }
     });
   </script>

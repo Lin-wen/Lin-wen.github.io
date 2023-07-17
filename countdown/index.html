@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>计时</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="main">
+    <div class="pane-when">
+      <div class="content">
+        <div class="clock clock-countdown">
+          <div class="elem-center">
+            <div class="digit">
+              <span id="days" class="days">00</span>
+              <span class="txt">天</span>
+            </div>
+          </div>
+          <div class="elem-bottom">
+            <div class="deco"></div>
+            <span id="hours" class="hours">00</span>
+            <span class="thin">小时</span>
+            <span id="minutes" class="minutes">00</span>
+            <span class="thin">分钟</span>
+            <span id="seconds" class="seconds">00</span>
+            <span class="thin">秒</span>
+          </div>
+        </div>
+        <footer>
+          <p>距上一次见面已过去</p>
+          <!-- 2020年 <strong>10月06日</strong> -->
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/jquery.min.js"></script>
+  <script>
+    function downCount () {
+      var pastDate = new Date('2020-10-06 23:59:59');
+      var currentDate = new Date();
+      var timeDifference = currentDate.getTime() - pastDate.getTime();
+      var seconds = Math.floor(timeDifference / 1000);
+      var minutes = Math.floor(seconds / 60);
+      var hours = Math.floor(minutes / 60);
+      var days = Math.floor(hours / 24);
+
+      hours %= 24;
+      minutes %= 60;
+      seconds %= 60;
+
+      $('#days').text(days);
+      $('#hours').text(padZero(hours));
+      $('#minutes').text(padZero(minutes));
+      $('#seconds').text(padZero(seconds));
+    }
+
+    function padZero (n) {
+      return n > 10 ? n : '0' + n
+    }
+
+    setInterval(function() {
+      downCount()
+    }, 1000)
+
+    // 生成随机的 RGB 颜色值
+    function getRandomColor() {
+      var r = Math.floor(Math.random() * 256);
+      var g = Math.floor(Math.random() * 256);
+      var b = Math.floor(Math.random() * 256);
+      return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+
+    // 设置随机背景颜色
+    function setRandomBackgroundColor() {
+      var color = getRandomColor();
+      document.body.style.backgroundColor = color;
+    }
+
+    // 页面加载完成后设置初始的随机背景颜色
+    window.addEventListener("DOMContentLoaded", setRandomBackgroundColor);
+
+    // 每隔一段时间改变背景颜色
+    setInterval(setRandomBackgroundColor, 3000);
+  </script>
+</body>
+</html>

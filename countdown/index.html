@@ -52,13 +52,14 @@
       <!-- 背景音乐 -->
       <div class="music">
         <audio id="music-audio" loop autoplay>
-          <source src="video/xjn.ogg" type="" />
+          <source src="video/xjn.mp3" type="audio/mp3" />
         </audio>
         <div class="control"></div>
       </div>
     </div>
 
     <script src="js/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
     <script>
       // 获取当前日期
       const currentDate = new Date()
@@ -152,26 +153,9 @@
         }
       })
 
-      wx.ready(function() {
+      document.addEventListener("WeixinJSBridgeReady", function () { 
         audio.play()
-      })
-
-      // 生成随机的 RGB 颜色值
-      // function getRandomColor() {
-      //   var r = Math.floor(Math.random() * 256);
-      //   var g = Math.floor(Math.random() * 256);
-      //   var b = Math.floor(Math.random() * 256);
-      //   return "rgb(" + r + ", " + g + ", " + b + ")";
-      // }
-
-      // function setRandomBackgroundColor() {
-      //   var color = getRandomColor();
-      //   document.body.style.backgroundColor = color;
-      // }
-
-      // window.addEventListener("DOMContentLoaded", setRandomBackgroundColor);
-
-      // setInterval(setRandomBackgroundColor, 3000);
+      }, false)
     </script>
   </body>
 </html>

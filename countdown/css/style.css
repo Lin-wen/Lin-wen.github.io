@@ -25,8 +25,8 @@
   top: 0;
   width: 100vw;
   height: 100vh;
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
   background: rgba(0, 0, 0, 0.4);
   z-index: -1;
 }
@@ -138,4 +138,48 @@
   font-family: 'Opensans';
   text-align: center;
   color: #f4e5b3;
+}
+
+/*音乐控制*/
+.music {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  z-index: 9;
+}
+
+.music .control {
+  width: 30px;
+  height: 30px;
+  background: url(../images/icon-music.png) no-repeat center center;
+  background-size: 100% 100%;
+  -webkit-animation: rotate2d 1.2s linear infinite;
+  animation: rotate2d 1.2s linear infinite;
+}
+
+.music.stopped .control {
+  -webkit-animation-play-state: paused;
+  animation-play-state: paused;
+}
+
+@-webkit-keyframes rotate2d {
+  form {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate2d {
+  form {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

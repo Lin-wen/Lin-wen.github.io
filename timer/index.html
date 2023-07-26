@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>计时</title>
+    <title>此刻</title>
     <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -92,6 +92,7 @@
       ]
       const dayOfWeekText = daysOfWeekText[dayOfWeek]
       $('#month').text(`${monthText} ${date} ${dayOfWeekText}`)
+      
       // 查询天气
       $.ajax({
         url: 'https://restapi.amap.com/v3/weather/weatherInfo',

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>此刻</title>
+    <link rel="stylesheet" href="css/normalize.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div class="main">
+      <div class="bg"></div>
+      <div class="bg-mask"></div>
+      <div class="content">
+        <div class="title">
+          <div id="month"></div>
+          <div class="line"></div>
+          <div class="weather">
+            <div class="city">万安</div>
+            <div id="weather"></div>
+            <div id="temperature"></div>
+          </div>
+        </div>
+
+        <div class="clock">
+          <div class="left-top"></div>
+          <div class="right-top"></div>
+          <div class="right-bottom"></div>
+          <div class="left-bottom"></div>
+
+          <div class="days">
+            <div id="days" class="num">0</div>
+            <div class="txt">天</div>
+          </div>
+          <div class="time">
+            <span id="hours" class="hours">00</span>
+            <span class="thin">小时</span>
+            <span id="minutes" class="minutes">00</span>
+            <span class="thin">分钟</span>
+            <span id="seconds" class="seconds">00</span>
+            <span class="thin">秒</span>
+          </div>
+        </div>
+
+        <div class="desc">认识何田香小朋友的第</div>
+      </div>
+
+      <!-- 背景音乐 -->
+      <div class="music">
+        <audio id="music-audio" loop autoplay>
+          <source src="audio/yj.mp3" type="audio/mp3" />
+        </audio>
+        <div class="control"></div>
+      </div>
+    </div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+    <script>
+      // 获取当前日期
+      const currentDate = new Date()
+      const monthsText = [
+        '壹月',
+        '贰月',
+        '叁月',
+        '肆月',
+        '伍月',
+        '陆月',
+        '柒月',
+        '捌月',
+        '玖月',
+        '拾月',
+        '拾壹月',
+        '拾贰月'
+      ]
+      const month = currentDate.getMonth() + 1
+      const monthText = monthsText[month - 1]
+      const date = currentDate.getDate()
+      const dayOfWeek = currentDate.getDay()
+      const daysOfWeekText = [
+        '星期日',
+        '星期一',
+        '星期二',
+        '星期三',
+        '星期四',
+        '星期五',
+        '星期六'
+      ]
+      const dayOfWeekText = daysOfWeekText[dayOfWeek]
+      $('#month').text(`${monthText} ${date} ${dayOfWeekText}`)
+      
+      // 查询天气
+      $.ajax({
+        url: 'https://restapi.amap.com/v3/weather/weatherInfo',
+        type: 'get',
+        data: {
+          key: '661746b556a1ea5f19d99ed1906d5241',
+          city: 360828
+        },
+        dataType: 'json',
+        success: function (res) {
+          if (res.status == 1) {
+            const data = res.lives[0]
+            $('#weather').text(data.weather)
+            $('#temperature').text(`${data.temperature}℃`)
+          }
+        },
+        fail: function (res) {
+          console.log(res)
+        }
+      })
+
+      function downCount() {
+        var pastDate = new Date('2024-04-06 23:59:59')
+        var today = new Date()
+        var timeDifference = today.getTime() - pastDate.getTime()
+        var seconds = Math.floor(timeDifference / 1000)
+        var minutes = Math.floor(seconds / 60)
+        var hours = Math.floor(minutes / 60)
+        var days = Math.floor(hours / 24)
+
+        hours %= 24
+        minutes %= 60
+        seconds %= 60
+
+        $('#days').text(days)
+        $('#hours').text(padZero(hours))
+        $('#minutes').text(padZero(minutes))
+        $('#seconds').text(padZero(seconds))
+      }
+
+      function padZero(n) {
+        return n >= 10 ? n : '0' + n
+      }
+
+      setInterval(downCount, 1000)
+
+      // 音乐控制
+      var lock = true
+      var audio = document.getElementById('music-audio')
+      $('.music').on('click', function () {
+        if (lock) {
+          $(this).addClass('stopped')
+          audio.pause()
+          lock = false
+        } else {
+          $(this).removeClass('stopped')
+          audio.play()
+          lock = true
+        }
+      })
+
+      document.addEventListener("WeixinJSBridgeReady", function () { 
+        audio.play()
+      }, false)
+    </script>
+  </body>
+</html>

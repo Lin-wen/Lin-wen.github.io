@@ -18,7 +18,8 @@
       <div class="content">
         <div class="title">
           <div id="month"></div>
-          <div class="line"></div>
+          <!-- <div class="line"></div> -->
+          <img class="heart" src="./images/heart.png" alt="">
           <div class="weather">
             <div class="city">万安</div>
             <div id="weather"></div>
@@ -115,7 +116,7 @@
       })
 
       function downCount() {
-        var pastDate = new Date('2024-04-06 23:59:59')
+        var pastDate = new Date('2024-04-05 23:59:59')
         var today = new Date()
         var timeDifference = today.getTime() - pastDate.getTime()
         var seconds = Math.floor(timeDifference / 1000)

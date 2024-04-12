@@ -40,10 +40,15 @@
   text-align: center;
 }
 .title .line {
-  margin: 10px;
+  margin: 10px 0;
   width: 50px;
   height: 1px;
   background: #f4e5b3;
+}
+.heart  {
+  margin: 8px 0;
+  width: 30px;
+  height: 30px;
 }
 .weather {
   display: flex;

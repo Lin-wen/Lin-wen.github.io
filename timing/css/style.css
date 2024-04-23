@@ -17,6 +17,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  transition: all 1s ease-in-out;
   z-index: -2;
 }
 .bg-mask {
@@ -49,6 +50,7 @@
   margin: 8px 0;
   width: 30px;
   height: 30px;
+  animation: heartbeat 1s infinite alternate;
 }
 .weather {
   display: flex;
@@ -186,5 +188,14 @@
   to {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+@keyframes heartbeat {
+  0% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(1.2);
   }
 }

@@ -13,7 +13,7 @@
 
   <body>
     <div class="main">
-      <div class="bg"></div>
+      <div class="bg" id="bg"></div>
       <div class="bg-mask"></div>
       <div class="content">
         <div class="title">
@@ -115,6 +115,8 @@
         }
       })
 
+      var images = ['images/bg.jpg', 'images/bg2.jpg', 'images/bg3.jpg']
+      var count = 0
       function downCount() {
         var pastDate = new Date('2024-04-05 23:59:59')
         var today = new Date()
@@ -132,6 +134,12 @@
         $('#hours').text(padZero(hours))
         $('#minutes').text(padZero(minutes))
         $('#seconds').text(padZero(seconds))
+
+        count++
+        if (count % 5 === 0) {
+          const index = Math.floor(Math.random() * images.length)
+          $('#bg').css('background-image', 'url(' + images[index] + ')');
+        }
       }
 
       function padZero(n) {

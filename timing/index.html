@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="desc">认识何田香小朋友已经</div>
+        <div class="desc" id="desc">认识何田香小朋友已经</div>
       </div>
 
       <!-- 背景音乐 -->
@@ -93,6 +93,12 @@
       ]
       const dayOfWeekText = daysOfWeekText[dayOfWeek]
       $('#month').text(`${monthText} ${date} ${dayOfWeekText}`)
+
+      $('#desc').on('click', function () {
+        if (month === 4 && date === 29) {
+          $('#desc').text('认识香香公主已经')
+        }
+      })
       
       // 查询天气
       $.ajax({
